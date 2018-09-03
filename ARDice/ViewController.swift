@@ -11,7 +11,7 @@ import SceneKit
 import ARKit
 
 class ViewController: UIViewController, ARSCNViewDelegate {
-
+    
     @IBOutlet var sceneView: ARSCNView!
     
     override func viewDidLoad() {
@@ -23,26 +23,42 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
         
-        let cube = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0.01)
+        //        let cube = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0.01)
+        //        let material = SCNMaterial()
+        //        material.diffuse.contents = UIColor.red
+        //        cube.materials = [material]
+        //
+        //
+        //        let node = SCNNode()
+        //        node.position = SCNVector3(x: 0, y: 0.1, z: -0.5)
+        //        node.geometry = cube
+        //        sceneView.scene.rootNode.addChildNode(node)
+        
+        //        Lightning enabled
+        //        sceneView.automaticallyUpdatesLighting = true
+        
+        
+        //        // Create a new scene
+        //        let scene = SCNScene(named: "art.scnassets/ship.scn")!
+        //
+        //        // Set the scene to the view
+        //        sceneView.scene = scene
+        
+        
+        //        Creating a Moon
+        
+        let sphere = SCNSphere(radius: 0.25)
         let material = SCNMaterial()
-        material.diffuse.contents = UIColor.red
-        cube.materials = [material]
-        
-        
+        material.diffuse.contents = UIImage(named: "art.scnassets/moon.jpg")
+        sphere.materials = [material]
         let node = SCNNode()
         node.position = SCNVector3(x: 0, y: 0.1, z: -0.5)
-        node.geometry = cube
+        node.geometry = sphere
         sceneView.scene.rootNode.addChildNode(node)
-        
-//        Lightning enabled
         sceneView.automaticallyUpdatesLighting = true
         
         
-//        // Create a new scene
-//        let scene = SCNScene(named: "art.scnassets/ship.scn")!
-//
-//        // Set the scene to the view
-//        sceneView.scene = scene
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,7 +66,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
-
+        
         // Run the view's session
         sceneView.session.run(configuration)
     }
@@ -66,17 +82,17 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
     }
-
+    
     // MARK: - ARSCNViewDelegate
     
-/*
-    // Override to create and configure nodes for anchors added to the view's session.
-    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        let node = SCNNode()
+    /*
+     // Override to create and configure nodes for anchors added to the view's session.
+     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
+     let node = SCNNode()
      
-        return node
-    }
-*/
+     return node
+     }
+     */
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
